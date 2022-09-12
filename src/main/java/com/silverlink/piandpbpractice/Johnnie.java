@@ -7,19 +7,16 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
-public class Johnnie extends SimpleFileVisitor<Path> {
+public class Johnnie extends SimpleFileVisitor<Path>{
 
     private int fileCount;
     private final Path destino;
     private int index = 0;
-    private double walkerProgress = -0.1;
 
     public Johnnie(Path destino){
         this.destino = destino;
     }
     public int getFileCount() { return fileCount; }
-    public int getIndex() { return index; }
-    public double getWalkerProgress() { return walkerProgress; }
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
@@ -31,8 +28,9 @@ public class Johnnie extends SimpleFileVisitor<Path> {
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         index++;
-        walkerProgress = ((double)fileCount / index) / ((double)(fileCount)*100);
+        Progress.setProgress((double)index / fileCount);
         Files.copy(file, Path.of(destino.toString() + "\\" + file.getName(file.getNameCount()-1)));
+        System.out.println(Progress.getProgress());
         return super.visitFile(file, attrs);
     }
 

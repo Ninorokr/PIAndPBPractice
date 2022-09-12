@@ -23,43 +23,37 @@ public class ProgressController implements Initializable {
 
     @FXML
     public Button btnAbrirOrigen;
-
     @FXML
     public Button btnAbrirDestino;
-
     @FXML
     public Button btnCopiar;
-
     @FXML
     public Label lblRutaOrigen;
-
     @FXML
     public Label lblRutaDestino;
-
     @FXML
     public ProgressBar pbProgreso;
-
     @FXML
     public ProgressIndicator piProgreso;
 
     public DirectoryChooser chooser;
-
     public File fileOrigen;
     public File fileDestino;
     public Johnnie walker;
-    public Progress progress;
+//    public Progress progress;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        progress = new Progress();
-        progress.progressProperty().addListener(new ChangeListener<Number>() {
+//        progress = new Progress();
+        Progress.progressProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                pbProgreso.setProgress(progress.getProgress());
-                piProgreso.setProgress(progress.getProgress());
+                pbProgreso.setProgress(Progress.getProgress());
+                piProgreso.setProgress(Progress.getProgress());
             }
         });
+        Progress.setProgress(-.1);
     }
 
     public void abrirOrigen(){
@@ -83,7 +77,6 @@ public class ProgressController implements Initializable {
 
     public void copiar() throws IOException {
         walker = new Johnnie(Path.of(fileDestino.toURI()));
-        progress.setProgress(walker.getWalkerProgress());
         Files.walkFileTree(Path.of(fileOrigen.toURI()), walker);
 
     }
