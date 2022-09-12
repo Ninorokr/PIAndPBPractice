@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
-public class Johnnie extends SimpleFileVisitor<Path>{
+public class Johnnie extends SimpleFileVisitor<Path> implements Runnable{
 
     private int fileCount;
     private final Path destino;
@@ -19,6 +19,11 @@ public class Johnnie extends SimpleFileVisitor<Path>{
     public int getFileCount() { return fileCount; }
 
     @Override
+    public void run() {
+        Progress.setProgress((double)index / fileCount);
+    }
+
+    @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
         fileCount = dir.toFile().list().length;
         System.out.println("File count: " + getFileCount());
@@ -28,7 +33,8 @@ public class Johnnie extends SimpleFileVisitor<Path>{
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         index++;
-        Progress.setProgress((double)index / fileCount);
+        Thread t1 = new Thread(this);
+        t1.start();
         Files.copy(file, Path.of(destino.toString() + "\\" + file.getName(file.getNameCount()-1)));
         System.out.println(Progress.getProgress());
         return super.visitFile(file, attrs);
