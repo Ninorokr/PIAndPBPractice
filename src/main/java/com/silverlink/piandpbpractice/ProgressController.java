@@ -45,7 +45,7 @@ public class ProgressController implements Initializable {
     public File fileOrigen;
     public File fileDestino;
 
-    public Johnnie walker = new Johnnie();
+    public Johnnie walker;
 
 
     @Override
@@ -71,7 +71,10 @@ public class ProgressController implements Initializable {
     }
 
     public void copiar() throws IOException {
+        walker = new Johnnie(Path.of(fileOrigen.toURI()));
         Files.walkFileTree(Path.of(fileOrigen.toURI()), walker);
-        System.out.println("File count: " + walker.fileCount);
+        //TODO: Dividir 100 entre la cuenta de archivos y anexarlo a los progressbar
+//        Files.walkFileTree(Path.of("D:\\PDFs\\extract"), new Johnnie());
+
     }
 }

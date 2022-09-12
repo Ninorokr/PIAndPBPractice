@@ -7,23 +7,10 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
-public class Johnnie extends SimpleFileVisitor<Path> {
-
-    private int fileCount;
-    private Path destino;
-
-    public Johnnie(Path destino){
-        this.destino = destino;
-    }
-
-    public int getFileCount() {
-        return fileCount;
-    }
+public class Test extends SimpleFileVisitor<Path>{
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-        fileCount = dir.toFile().list().length;
-        System.out.println("File count: " + getFileCount());
         return super.preVisitDirectory(dir, attrs);
     }
 
