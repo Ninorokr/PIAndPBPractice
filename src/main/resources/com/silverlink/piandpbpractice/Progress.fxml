@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.silverlink.piandpbpractice.ProgressController">
+   <children>
+      <Button fx:id="btnAbrirOrigen" layoutX="39.0" layoutY="259.0" mnemonicParsing="false" onAction="#abrirOrigen" text="Abrir..." />
+      <Label fx:id="lblRutaOrigen" layoutX="106.0" layoutY="263.0" prefHeight="17.0" prefWidth="301.0" />
+      <Label layoutX="21.0" layoutY="234.0" text="Origen" />
+      <Separator layoutX="80.0" layoutY="241.0" prefHeight="0.0" prefWidth="500.0" />
+      <Label layoutX="21.0" layoutY="292.0" text="Destino" />
+      <Separator layoutX="80.0" layoutY="299.0" prefHeight="0.0" prefWidth="500.0" />
+      <Button fx:id="btnAbrirDestino" layoutX="39.0" layoutY="319.0" mnemonicParsing="false" onAction="#abrirDestino" text="Abrir..." />
+      <Label fx:id="lblRutaDestino" layoutX="106.0" layoutY="323.0" prefHeight="17.0" prefWidth="301.0" />
+      <ProgressBar fx:id="pbProgreso" layoutX="25.0" layoutY="359.0" prefHeight="18.0" prefWidth="557.0" progress="0.0" />
+      <ProgressIndicator fx:id="piProgreso" layoutX="430.0" layoutY="14.0" minHeight="150.0" minWidth="150.0" progress="0.0" />
+      <Button fx:id="btnCopiar" layoutX="479.0" layoutY="200.0" mnemonicParsing="false" onAction="#copiar" text="Copiar" />
+   </children>
+</AnchorPane>
