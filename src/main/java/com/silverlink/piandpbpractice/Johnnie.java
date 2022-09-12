@@ -10,15 +10,16 @@ import java.nio.file.attribute.BasicFileAttributes;
 public class Johnnie extends SimpleFileVisitor<Path> {
 
     private int fileCount;
-    private Path destino;
+    private final Path destino;
+    private int index = 0;
+    private double walkerProgress = -0.1;
 
     public Johnnie(Path destino){
         this.destino = destino;
     }
-
-    public int getFileCount() {
-        return fileCount;
-    }
+    public int getFileCount() { return fileCount; }
+    public int getIndex() { return index; }
+    public double getWalkerProgress() { return walkerProgress; }
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
@@ -29,7 +30,9 @@ public class Johnnie extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        Files.copy(file, Path.of("D:\\PDFs3\\copied\\" + file.getName(file.getNameCount()-1)));
+        index++;
+        walkerProgress = ((double)fileCount / index) / ((double)(fileCount)*100);
+        Files.copy(file, Path.of(destino.toString() + "\\" + file.getName(file.getNameCount()-1)));
         return super.visitFile(file, attrs);
     }
 
